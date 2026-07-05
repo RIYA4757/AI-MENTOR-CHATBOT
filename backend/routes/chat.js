@@ -1,14 +1,27 @@
 import "dotenv/config";
 import express from "express";
-import OpenAI from "openai";
+// import OpenAI from "openai";
+// import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { hiteshPersona } from "../personas/hitesh.js";
 import { piyushPersona } from "../personas/piyush.js";
 import { searchTopic } from "../services/tavily.js";
 
 const router = express.Router();
 // console.log("OPENAI KEY:", process.env.OPENAI_API_KEY);
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+// const client = new OpenAI({
+//   apiKey: process.env.GEMINI_API_KEY,
+// });
+// const client = new GoogleGenAI({
+//   apiKey: process.env.GEMINI_API_KEY,
+// });
+
+const genAI = new GoogleGenerativeAI(
+  process.env.GEMINI_API_KEY
+);
+
+const model = genAI.getGenerativeModel({
+  model: "gemini-2.5-flash"
 });
 
 let hiteshMessages = [
@@ -120,25 +133,41 @@ Rules:
     console.log("Calling OpenAI...");
 
     const start = Date.now();
+    const prompt = messages
+  .map(msg => `${msg.role.toUpperCase()}:\n${msg.content}`)
+  .join("\n\n");
 
-    const completion = await client.chat.completions.create({
-      model: "gpt-5-mini",
-      messages,
-      max_completion_tokens: 3500,
-    });
+const result = await model.generateContent(prompt);
 
-    console.log(
-      `OpenAI responded in ${(
-        (Date.now() - start) /
-        1000
-      ).toFixed(2)} sec`
-    );
+console.log(
+  `Gemini responded in ${(
+    (Date.now() - start) /
+    1000
+  ).toFixed(2)} sec`
+);
 
-    const assistantMessage = completion.choices?.[0]?.message;
+const reply =
+  result.response.text() ??
+  "Sorry, I couldn't generate a response.";
 
-    const reply =
-      assistantMessage?.content ??
-      "Sorry, I couldn't generate a response.";
+    // const completion = await client.chat.completions.create({
+    //   model: "gpt-5-mini",
+    //   messages,
+    //   max_completion_tokens: 3500,
+    // });
+
+    // console.log(
+    //   `OpenAI responded in ${(
+    //     (Date.now() - start) /
+    //     1000
+    //   ).toFixed(2)} sec`
+    // );
+
+    // const assistantMessage = completion.choices?.[0]?.message;
+
+    // const reply =
+    //   assistantMessage?.content ??
+    //   "Sorry, I couldn't generate a response.";
 
     messages.push({
       role: "assistant",

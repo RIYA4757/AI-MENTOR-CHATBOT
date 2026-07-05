@@ -7,7 +7,7 @@ import chatRouter from "./routes/chat.js";
 dotenv.config();
 // console.log("OPENAI:", !!process.env.OPENAI_API_KEY);
 // console.log("TAVILY:", !!process.env.TAVILY_API_KEY);
-
+// console.log("GEMINI:", !!process.env.GEMINI_API_KEY);
 const app = express();
 
 app.use(cors());
