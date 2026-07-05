@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mentor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>AI Mentor</h1>
+
+        <p class="subtitle">
+            Learn from your favourite mentor.
+        </p>
+
+        <div class="mentor-selector">
+
+            <button id="hiteshBtn" class="mentor-card active">
+
+                <img
+                    src="images/hitesh.jpg"
+                    alt="Hitesh"
+                    class="mentor-img">
+
+                <span class="name">
+                    Hitesh AI
+                </span>
+
+                <span class="role">
+                    Backend • AI • Mentor
+                </span>
+
+            </button>
+
+            <button id="piyushBtn" class="mentor-card">
+
+                <img
+                    src="images/piyush.jpg"
+                    alt="Piyush"
+                    class="mentor-img">
+
+                <span class="name">
+                    Piyush AI
+                </span>
+
+                <span class="role">
+                    GenZ • AI • Startup
+                </span>
+
+            </button>
+
+        </div>
+
+        <div id="chatBox" class="chat-box"></div>
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="message"
+                placeholder="Ask anything...">
+
+            <button id="sendBtn">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
