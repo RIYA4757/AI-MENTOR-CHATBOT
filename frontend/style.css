@@ -310,3 +310,41 @@ h1{
     padding: 10px 14px;
     white-space: nowrap;
 }
+@media (max-width: 768px) {
+
+    body{
+        padding:15px;
+        height:auto;
+        min-height:100vh;
+    }
+
+    .container{
+        width:100%;
+        height:auto;
+        min-height:95vh;
+        padding:18px;
+    }
+
+    .mentor-selector{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .mentor-card{
+        width:100%;
+        max-width:320px;
+    }
+
+    .chat-box{
+        height:55vh;
+    }
+
+    .input-area{
+        flex-direction:column;
+    }
+
+    #sendBtn{
+        width:100%;
+    }
+
+}
